@@ -3,9 +3,15 @@ const express = require('express');
 const app = express();
 
 app.get('/', (req, res) => {
-    res.send('WELCOME TO HOMEPAGE!!')
+    res.status(200);
 });
 
+app.get('/home', (req, res) => {
+    res.status(200).send('some text');
+});
+
+
+
 app.listen(process.env.port || 3000, () => {
-    console.log('App started!!');
+    console.log('App started on port process.env.port');
 })
