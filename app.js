@@ -1,14 +1,24 @@
 const { Worker, isMainThread, parentPort, MessageChannel } = require('node:worker_threads');
 const express = require('express');
+const bodyParser = require('body-parser');
+// const { publishToQueue } = require('./services/messageService');
 
 const app = express();
+app.use(bodyParser.urlencoded({ extended: false }));
+app.use(bodyParser.json());
 
 app.get('/', (req, res) => {
     res.status(200);
 });
 
+app.post('/msg', async (req, res) => {
+    let { queueName, payload } = req.body;
+    // await publishToQueue(queueName, payload);
+    res.status(200).send('200');
+});
+
 app.get('/home', (req, res) => {
-    res.status(200).send('some text');
+    res.status(200).send('some text!!!!!!');
 });
 
 app.get('/long-process', (req, res) => {
@@ -24,6 +34,6 @@ app.get('/long-process', (req, res) => {
 
 
 
-app.listen(process.env.PORT || 3000, () => {
+app.listen(1992, () => {
     console.log('App started on port process.env.port');
 });
