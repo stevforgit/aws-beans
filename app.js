@@ -1,14 +1,48 @@
 const { Worker, isMainThread, parentPort, MessageChannel } = require('node:worker_threads');
 const express = require('express');
 const bodyParser = require('body-parser');
+const cluster = require('cluster');
+const os = require('os');
+
+const mongoose = require("mongoose");
+
+var uri = "mongodb://user:password@nodejs-nginx.cloudns.ph:27017/mern";
+
+
+
+
+
+
 // const { publishToQueue } = require('./services/messageService');
+
+console.log(os.cpus().length);
 
 const app = express();
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(bodyParser.json());
 
 app.get('/', (req, res) => {
-    res.status(200);
+    res.status(200).send('Healthy');
+});
+
+app.get('/connect', (req, res) => {
+    try {
+
+
+        mongoose.disconnect();
+
+        mongoose.connect(uri, { useUnifiedTopology: true, useNewUrlParser: true });
+
+        const connection = mongoose.connection;
+
+        connection.once("open", function () {
+            console.log("MongoDB database connection established successfully");
+            res.status(200).send('Connected!!!');
+        });
+    } catch (err) {
+
+        res.status(200).send('Unable to connect!!!', err);
+    }
 });
 
 app.post('/msg', async (req, res) => {
@@ -18,7 +52,14 @@ app.post('/msg', async (req, res) => {
 });
 
 app.get('/home', (req, res) => {
-    res.status(200).send('some text!!!!!!');
+    console.log(process.pid)
+    for (let i = 0; i < 100000; i++) {
+        for (let i = 0; i < 100000; i++) {
+
+        }
+
+    }
+    res.status(200).send(`some text!!!!!!XXXX ${process.pid}`);
 });
 
 app.get('/long-process', (req, res) => {
@@ -33,7 +74,13 @@ app.get('/long-process', (req, res) => {
 });
 
 
-
-app.listen(process.env.PORT || 3000, () => {
-    console.log('App started on port process.env.port');
+app.listen(process.env.PORT || 8080, () => {
+    console.log('App started on port process.env.port', process.pid);
 });
+
+
+
+
+
+
+
