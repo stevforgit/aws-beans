@@ -68,8 +68,6 @@ app.get('/long-process', (req, res) => {
     worker.on('message', (data) => {
         console.log('Data from Worker ', data);
     });
-
-
     res.status(200).send('Processing!!');
 });
 
@@ -77,6 +75,7 @@ app.get('/long-process', (req, res) => {
 app.listen(process.env.PORT || 8080, () => {
     console.log('App started on port process.env.port', process.pid);
 });
+
 
 
 
