@@ -8,11 +8,6 @@ const mongoose = require("mongoose");
 
 var uri = "mongodb://user:password@nodejs-nginx.cloudns.ph:27017/mern";
 
-
-
-
-
-
 // const { publishToQueue } = require('./services/messageService');
 
 console.log(os.cpus().length);
@@ -27,8 +22,6 @@ app.get('/', (req, res) => {
 
 app.get('/connect', (req, res) => {
     try {
-
-
         mongoose.disconnect();
 
         mongoose.connect(uri, { useUnifiedTopology: true, useNewUrlParser: true });
@@ -40,7 +33,6 @@ app.get('/connect', (req, res) => {
             res.status(200).send('Connected!!!');
         });
     } catch (err) {
-
         res.status(200).send('Unable to connect!!!', err);
     }
 });
