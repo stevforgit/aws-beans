@@ -9,6 +9,6 @@ import { logger } from './modules/loggers/index';
 
 const expressApp: any = app;
 
-expressApp.listen(process.env.PORT || 5000, () => {
+expressApp.listen(process.env.PORT || 8080, () => {
     logger.info(`${process.env.NODE_ENV} server is now running....`);
 });
