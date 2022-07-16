@@ -23,3 +23,9 @@ exports.v1.get('/', (req, res) => __awaiter(void 0, void 0, void 0, function* ()
     loggers_1.logger.info('v1.0 health check!');
     res.send(result);
 }));
+exports.v1.get('/check', (req, res) => __awaiter(void 0, void 0, void 0, function* () {
+    const agifyService = ioc_1.container.get(ioc_1.TOKENS.agifyService);
+    const result = yield agifyService.get();
+    loggers_1.logger.info('v1.0 health check!');
+    res.send(result);
+}));
