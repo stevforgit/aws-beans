@@ -10,6 +10,6 @@ dotenv_1.default.config();
 const app_startup_1 = require("./app_startup");
 const index_1 = require("./modules/loggers/index");
 const expressApp = app_startup_1.app;
-expressApp.listen(process.env.PORT || 5000, () => {
+expressApp.listen(process.env.PORT || 8080, () => {
     index_1.logger.info(`${process.env.NODE_ENV} server is now running....`);
 });
