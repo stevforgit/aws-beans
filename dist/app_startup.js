@@ -9,5 +9,8 @@ const index_1 = require("./modules/routes/v1/index");
 const index_2 = require("./modules/routes/v2/index");
 const app = (0, express_1.default)();
 exports.app = app;
+app.get('/', (req, res) => {
+    res.status(200).send('healthy');
+});
 app.use('/api/v1', index_1.v1);
 app.use('/api/v2', index_2.v2);
