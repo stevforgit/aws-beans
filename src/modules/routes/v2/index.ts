@@ -7,3 +7,8 @@ v2.get('/', (req, res) => {
     logger.info('v2.0 health check!');
     res.send('ok');
 });
+
+v2.get('/check', (req, res) => {
+    logger.info('v2.0 health check!');
+    res.send('ok');
+});
